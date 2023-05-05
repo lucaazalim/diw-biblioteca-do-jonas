@@ -1,5 +1,3 @@
-// Alert
-
 function alertar(mensagem, tipo, id = 'alerta', temporaria = true) {
 
     fecharAlerta();

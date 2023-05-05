@@ -11,6 +11,14 @@ class Livro {
     }
 }
 
+class Busca {
+    constructor(nome, genero, emprestado) {
+        this.nome = nome;
+        this.genero = genero;
+        this.emprestado = emprestado;
+    }
+}
+
 const livros_padrao = [
     new Livro("https://www.lpm.com.br/livros/imagens/dom_quixote_hq_9788525433633_hd.jpg", "Dom Quixote", "1ª edição", 1605, "Romance", 863, "Biblioteca de casa", false),
     new Livro("https://m.media-amazon.com/images/I/51tKyWgUD+L._SX327_BO1,204,203,200_.jpg", "1984", "1ª edição", 1949, "Ficção Distópica", 328, "Carro", true),
@@ -53,14 +61,30 @@ function guardarLivros() {
     localStorage.setItem('livros', JSON.stringify(Object.fromEntries(livros)));
 }
 
-function exibirLivros(filtroNome="") {
+function exibirLivros(busca) {
 
     $('#livros').html("");
 
     for (const [id, livro] of livros.entries()) {
 
-        if(filtroNome && !livro.titulo.startsWith(filtroNome)) {
-            continue;
+        if(busca) {
+
+            console.log(livro);
+            console.log(busca);
+
+            if(busca.nome && !livro.titulo.startsWith(busca.nome)) {
+                console.log("Filtrando titulo")
+                continue;
+            }
+
+            if(busca.genero && livro.genero != busca.genero) {
+                continue;
+            }
+
+            if(busca.emprestado && livro.emprestado != busca.emprestado) {
+                continue;
+            }
+
         }
 
         let capa = livro.capa != null ? livro.capa : 'https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png';
@@ -141,7 +165,7 @@ $('#btn-confirmar').click(function (event) {
         return false;
     }
 
-    if(livroId) {
+    if (livroId) {
 
         // Editando...
 
@@ -169,10 +193,10 @@ $('#btn-confirmar').click(function (event) {
 
         let livro = new Livro(capa, titulo, edicao, ano, genero, paginas, local, emprestado);
         criarLivro(livro);
-    
+
         formCriarLivro.reset();
         $('#modal-criar-livro').modal('hide');
-    
+
         alertar(`Livro <strong>${nome}</strong> criada com sucesso!`, "success");
 
     }
@@ -195,10 +219,28 @@ if (livrosLocalStorage) {
 
 }
 
-$('#btn-buscar').click(function() {
-    let filtroNome = $('#input-buscar-nome').val();
-    exibirLivros(filtroNome);
-    console.log("debug");
+let generos = new Set();
+
+for (const [id, livro] of livros.entries()) {
+    generos.add(livro.genero);
+}
+
+for(const genero of generos) {
+    $('#input-buscar-genero-livro').append(`<option value="${genero}">${genero}</option>`);
+}
+
+$('#btn-confirmar-busca').click(function () {
+
+    let nome = $('#input-buscar-nome-livro').val();
+    let genero = $('#input-buscar-genero-livro').val();
+    let emprestado = $('#input-buscar-emprestado-livro').val();
+
+    let busca = new Busca(nome, genero, emprestado);
+
+    exibirLivros(busca);
+
+    $('#modal-buscar-livro').modal('hide');
+
 });
 
 exibirLivros();

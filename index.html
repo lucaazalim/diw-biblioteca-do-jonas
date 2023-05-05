@@ -25,6 +25,51 @@
 
 <body>
 
+    <!-- Modal de busca livro-->
+
+    <div class="modal fade" id="modal-buscar-livro" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Buscar livros</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="form-buscar-livro">
+                        <div class="mb-3">
+
+                            <label for="input-buscar-nome-livro" class="form-label">Buscar por nome</label>
+                            <input id="input-buscar-nome-livro" type="text" class="form-control">
+                            <br>
+                            <label for="input-buscar-genero-livro" class="form-label">Buscar por gênero</label>
+                            <select id="input-buscar-genero-livro" class="form-select">
+                                <option value="" selected>Selecione um gênero</option>
+                            </select>
+                            <br>
+                            <label for="input-buscar-emprestado-livro" class="form-label">Buscar por emprestado</label>
+                            <select id="input-buscar-emprestado-livro" class="form-select">
+                                <option value=''selected>Selecione um estado</option>
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btn-confirmar-busca" type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Modal de criação de livro-->
 
     <div class="modal fade" id="modal-editar-livro" tabindex="-1" aria-hidden="true">
@@ -105,15 +150,11 @@
         <div id="alerta"></div>
 
         <div class="d-grid gap-2">
-
-            <form class="d-flex" role="search">
-                <input id="input-buscar-nome" class="form-control me-2" type="search" placeholder="Nome do livro">
-                <button id="btn-buscar" class="btn btn-success" type="button">Buscar</button>
-            </form>
-
             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-editar-livro"><i
                     class="fa-solid fa-plus"></i> Criar livro</button>
-                    
+            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                data-bs-target="#modal-buscar-livro"><i class="fa-solid fa-magnifying-glass"></i> Buscar livros</button>
+
         </div>
 
         <table class="table table-striped mt-3">
