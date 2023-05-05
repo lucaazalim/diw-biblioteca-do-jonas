@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros</title>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/86ad24bcb9.js" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- FinCouple -->
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Modal de criação de livro-->
+
+    <div class="modal fade" id="modal-editar-livro" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Criar/editar livro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="alerta-editar-livro"></div>
+
+                    <form id="form-editar-livro">
+                        <div class="mb-3">
+
+                            <input id="input-id-livro" type="hidden" class="form-control">
+
+                            <label for="input-capa-livro" class="form-label">Capa</label>
+                            <input id="input-capa-livro" type="text" class="form-control">
+                            <br>
+                            <label for="input-titulo-livro" class="form-label">Título</label>
+                            <input id="input-titulo-livro" type="text" class="form-control required">
+                            <br>
+                            <label for="input-edicao-livro" class="form-label">Edição</label>
+                            <input id="input-edicao-livro" type="text" class="form-control required">
+                            <br>
+                            <label for="input-ano-livro" class="form-label">Ano</label>
+                            <input id="input-ano-livro" type="number" class="form-control required">
+                            <br>
+                            <label for="input-genero-livro" class="form-label">Gênero</label>
+                            <input id="input-genero-livro" type="text" class="form-control required">
+                            <br>
+                            <label for="input-paginas-livro" class="form-label">Páginas</label>
+                            <input id="input-paginas-livro" type="number" class="form-control required">
+                            <br>
+                            <label for="input-local-livro" class="form-label">Local</label>
+                            <input id="input-local-livro" type="text" class="form-control required">
+                            <br>
+                            <input id="input-emprestado-livro" type="checkbox" class="form-check-input">
+                            <label class="form-check-label" for="input-emprestado-livro">Emprestado</label>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="btn-confirmar" type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo visível -->
+
+    <header>
+        <nav class="navbar bg-primary mb-5">
+            <div class="container">
+
+                <a class="navbar-brand" href="/">
+                    <img src="/img/logo.png" alt="FinCouple" width="200px">
+                </a>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <h1>Livros</h1>
+        <p>Crie, edite e remova livros da biblioteca.</p>
+
+        <div id="alerta"></div>
+
+        <div class="d-grid gap-2">
+
+            <form class="d-flex" role="search">
+                <input id="input-buscar-nome" class="form-control me-2" type="search" placeholder="Nome do livro">
+                <button id="btn-buscar" class="btn btn-success" type="button">Buscar</button>
+            </form>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-editar-livro"><i
+                    class="fa-solid fa-plus"></i> Criar livro</button>
+                    
+        </div>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Capa</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Edição</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col">Páginas</th>
+                    <th scope="col">Local</th>
+                    <th scope="col">Emprestado</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="livros"></tbody>
+        </table>
+
+    </div>
+
+    <div id="footer"></div>
+
+</body>
+
+<script src="livro.js"></script>
+
+</html>
